@@ -19,8 +19,8 @@ void main() {
     vec2 uv0 = vUv;
     vec3 finalColor = vec3(0.0);
 
-    for(float i = 0.0; i < 4.0; i++) {
-        vec2 uv = fract((vUv + i) * 1.5) - 0.5;
+    for(float i = 0.0; i < 3.0; i++) {
+        vec2 uv = fract((vUv + i) * 2.5) - 0.5;
 
         vec3 color = palette(length(uv0) + time * 0.4);
 

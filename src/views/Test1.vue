@@ -29,7 +29,7 @@ onMounted(() => {
 
   const clock = new Clock();
 
-  const geometry = new PlaneGeometry(7, 7);
+  const geometry = new PlaneGeometry(3,3);
   const material = new ShaderMaterial({
     uniforms: {
       time: { value: 0.0 },
@@ -40,7 +40,7 @@ onMounted(() => {
   const plane = new Mesh(geometry, material);
   scene.add(plane);
 
-  camera.position.z = 5;
+  camera.position.z = 1;
 
   const animate = function () {
     requestAnimationFrame(animate);
