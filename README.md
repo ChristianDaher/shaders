@@ -1,6 +1,6 @@
-# Christian Daher
+# Shaders
 
-Experimenting in Threejs.
+Experimenting in Threejs and Shaders.
 
 ## Project Setup
 
@@ -12,16 +12,4 @@ npm install
 
 ```sh
 npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Deploy to gh-pages branch
-
-```sh
-npm run deploy
 ```
