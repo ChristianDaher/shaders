@@ -4,9 +4,10 @@ import {
   Scene,
   PerspectiveCamera,
   WebGLRenderer,
-  BoxGeometry,
+  PlaneGeometry,
   ShaderMaterial,
   Mesh,
+  Clock,
 } from "three";
 import vertexShader from "@/shaders/Test1VertexShader.glsl";
 import fragmentShader from "@/shaders/Test1FragmentShader.glsl";
@@ -26,20 +27,24 @@ onMounted(() => {
   renderer.setSize(window.innerWidth, window.innerHeight);
   canvas.value.appendChild(renderer.domElement);
 
-  const geometry = new BoxGeometry();
+  const clock = new Clock();
+
+  const geometry = new PlaneGeometry(7, 7);
   const material = new ShaderMaterial({
+    uniforms: {
+      time: { value: 0.0 },
+    },
     vertexShader,
     fragmentShader,
   });
-  const cube = new Mesh(geometry, material);
-  scene.add(cube);
+  const plane = new Mesh(geometry, material);
+  scene.add(plane);
 
   camera.position.z = 5;
 
   const animate = function () {
     requestAnimationFrame(animate);
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
+    material.uniforms.time.value = clock.getElapsedTime();
     renderer.render(scene, camera);
   };
 
