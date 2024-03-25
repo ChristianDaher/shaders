@@ -4,13 +4,14 @@ import {
   Scene,
   PerspectiveCamera,
   WebGLRenderer,
-  PlaneGeometry,
+  TorusGeometry,
   ShaderMaterial,
   Mesh,
   Clock,
+  DoubleSide,
 } from "three";
-import vertexShader from "@/shaders/Test1VertexShader.glsl";
-import fragmentShader from "@/shaders/Test1FragmentShader.glsl";
+import vertexShader from "@/shaders/Test2VertexShader.glsl";
+import fragmentShader from "@/shaders/Test2FragmentShader.glsl";
 
 const canvas = ref(null);
 
@@ -29,18 +30,20 @@ onMounted(() => {
 
   const clock = new Clock();
 
-  const geometry = new PlaneGeometry(3, 3);
+  const geometry = new TorusGeometry(1, 0.3, 100, 100);
   const material = new ShaderMaterial({
     uniforms: {
       time: { value: 0.0 },
     },
     vertexShader,
     fragmentShader,
+    wireframe: true,
+    side: DoubleSide,
   });
   const plane = new Mesh(geometry, material);
   scene.add(plane);
 
-  camera.position.z = 1;
+  camera.position.z = 2;
 
   const animate = function () {
     requestAnimationFrame(animate);
