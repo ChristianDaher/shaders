@@ -1,5 +1,4 @@
-varying vec2 vUv;
-
+uniform vec2 resolution;
 uniform float time;
 
 vec3 palette(float t) {
@@ -11,18 +10,15 @@ vec3 palette(float t) {
     return a + b * cos(6.28318 * (c * t + d));
 }
 
-// vec3 palette(float t, vec3 a, vec3 b, vec3 c, vec3 d) {
-//     return a + b * cos(6.28318 * (c * t + d));
-// }
-
 void main() {
-    vec2 uv0 = vUv;
+    vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / resolution.y;
+    vec2 uv0 = uv;
     vec3 finalColor = vec3(0.0);
 
-    for(float i = 0.0; i < 3.0; i++) {
-        vec2 uv = fract((vUv + i) * 2.5) - 0.5;
+    for(float i = 0.0; i < 6.0; i++) {
+        uv = fract(uv * 1.5) - 0.5;
 
-        vec3 color = palette(length(uv0) + time * 0.4);
+        vec3 color = palette(length(uv0) + (time + i) * 0.4);
 
         float d = length(uv) * exp(-length(uv0));
         d = sin(d * 8.0 + time) / 8.;

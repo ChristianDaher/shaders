@@ -8,6 +8,7 @@ import {
   ShaderMaterial,
   Mesh,
   Clock,
+  Vector2,
 } from "three";
 import vertexShader from "@/shaders/Test1VertexShader.glsl";
 import fragmentShader from "@/shaders/Test1FragmentShader.glsl";
@@ -33,6 +34,7 @@ onMounted(() => {
   const material = new ShaderMaterial({
     uniforms: {
       time: { value: 0.0 },
+      resolution: { value: new Vector2(window.innerWidth, window.innerHeight) },
     },
     vertexShader,
     fragmentShader,
@@ -44,7 +46,7 @@ onMounted(() => {
 
   const animate = function () {
     requestAnimationFrame(animate);
-    material.uniforms.time.value = clock.getElapsedTime();
+    material.uniforms.time.value = clock.getElapsedTime() / 1.5;
     renderer.render(scene, camera);
   };
 
