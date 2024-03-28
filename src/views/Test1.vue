@@ -9,9 +9,11 @@ import {
   Mesh,
   Clock,
   Vector2,
+  DoubleSide,
 } from "three";
 import vertexShader from "@/shaders/Test1VertexShader.glsl";
 import fragmentShader from "@/shaders/Test1FragmentShader.glsl";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 const canvas = ref(null);
 
@@ -28,6 +30,8 @@ onMounted(() => {
   renderer.setSize(window.innerWidth, window.innerHeight);
   canvas.value.appendChild(renderer.domElement);
 
+  const controls = new OrbitControls(camera, renderer.domElement);
+
   const clock = new Clock();
 
   const geometry = new PlaneGeometry(3, 3);
@@ -38,6 +42,7 @@ onMounted(() => {
     },
     vertexShader,
     fragmentShader,
+    side: DoubleSide,
   });
   const plane = new Mesh(geometry, material);
   scene.add(plane);
@@ -46,6 +51,7 @@ onMounted(() => {
 
   const animate = function () {
     requestAnimationFrame(animate);
+    controls.update();
     material.uniforms.time.value = clock.getElapsedTime() / 1.5;
     renderer.render(scene, camera);
   };
