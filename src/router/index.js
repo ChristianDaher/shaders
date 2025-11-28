@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "@/views/Home.vue";
-import Test1 from "@/views/Test1.vue";
-import Test2 from "@/views/Test2.vue";
+import WavePattern from "@/views/WavePattern.vue";
+import TorusWireframe from "@/views/TorusWireframe.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,14 +12,14 @@ const router = createRouter({
       component: Home,
     },
     {
-      path: "/test1",
-      name: "Test1",
-      component: Test1,
+      path: "/wave-pattern",
+      name: "WavePattern",
+      component: WavePattern,
     },
     {
-      path: "/test2",
-      name: "Test2",
-      component: Test2,
+      path: "/torus-wireframe",
+      name: "TorusWireframe",
+      component: TorusWireframe,
     },
   ],
 });

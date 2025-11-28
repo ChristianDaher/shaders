@@ -1,5 +1,6 @@
 <script setup>
 import { onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
 import {
   Scene,
   PerspectiveCamera,
@@ -11,11 +12,16 @@ import {
   Vector2,
   DoubleSide,
 } from "three";
-import vertexShader from "@/shaders/Test1VertexShader.glsl";
-import fragmentShader from "@/shaders/Test1FragmentShader.glsl";
+import vertexShader from "@/shaders/WavePatternVertex.glsl";
+import fragmentShader from "@/shaders/WavePatternFragment.glsl";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 const canvas = ref(null);
+const router = useRouter();
+
+const goBack = () => {
+  router.push('/');
+};
 
 onMounted(() => {
   const scene = new Scene();
@@ -67,5 +73,20 @@ onMounted(() => {
 </script>
 
 <template>
-  <div ref="canvas"></div>
+  <div class="relative w-full h-screen">
+    <div ref="canvas" class="w-full h-full"></div>
+    <button
+      @click="goBack"
+      class="absolute top-8 left-8 px-6 py-3 bg-gray-900/80 backdrop-blur-sm text-white rounded-lg border border-gray-700/50 hover:bg-purple-600/80 hover:border-purple-500/50 transition-all duration-300 flex items-center gap-2 font-semibold shadow-lg hover:shadow-purple-500/20"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
+      Back to Gallery
+    </button>
+    <div class="absolute bottom-8 left-8 bg-gray-900/80 backdrop-blur-sm text-white px-6 py-4 rounded-lg border border-gray-700/50 shadow-lg">
+      <h2 class="text-xl font-bold mb-1">Animated Wave Pattern</h2>
+      <p class="text-sm text-gray-300">Click and drag to rotate • Scroll to zoom</p>
+    </div>
+  </div>
 </template>
