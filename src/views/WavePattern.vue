@@ -18,6 +18,7 @@ const geometry = new PlaneGeometry(3, 3);
       :camera-position="{ x: 0, y: 0, z: 1 }"
       :enable-controls="false"
       :time-scale="1.5"
+      :fit-to-screen="true"
     />
     <BackButton />
     <ShaderInfo 

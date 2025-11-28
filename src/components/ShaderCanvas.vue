@@ -43,12 +43,17 @@ const props = defineProps({
   timeScale: {
     type: Number,
     default: 1
+  },
+  fitToScreen: {
+    type: Boolean,
+    default: false
   }
 });
 
 const canvas = ref(null);
 let animationId = null;
 let renderer = null;
+let mesh = null;
 
 onMounted(() => {
   const scene = new Scene();
@@ -83,10 +88,27 @@ onMounted(() => {
     side: DoubleSide,
   });
 
-  const mesh = new Mesh(props.geometry, material);
+  mesh = new Mesh(props.geometry, material);
   scene.add(mesh);
 
   camera.position.set(props.cameraPosition.x, props.cameraPosition.y, props.cameraPosition.z);
+
+  // Function to scale plane to fit screen
+  const updatePlaneScale = () => {
+    if (props.fitToScreen && mesh && mesh.geometry.type === 'PlaneGeometry') {
+      const aspect = window.innerWidth / window.innerHeight;
+      const distance = camera.position.z;
+      const vFov = camera.fov * Math.PI / 180;
+      const planeHeightAtDistance = 2 * Math.tan(vFov / 2) * distance;
+      const planeWidthAtDistance = planeHeightAtDistance * aspect;
+      
+      // Scale uniformly to cover the screen based on the larger dimension
+      const scale = Math.max(planeWidthAtDistance / 3, planeHeightAtDistance / 3);
+      mesh.scale.set(scale, scale, 1);
+    }
+  };
+
+  updatePlaneScale();
 
   const animate = function () {
     animationId = requestAnimationFrame(animate);
@@ -101,6 +123,7 @@ onMounted(() => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
+    updatePlaneScale();
   };
 
   window.addEventListener("resize", handleResize);
