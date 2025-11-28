@@ -72,16 +72,16 @@ onMounted(() => {
     <div ref="canvas" class="w-full h-full"></div>
     <button
       @click="goBack"
-      class="absolute top-8 left-8 px-6 py-3 bg-gray-900/80 backdrop-blur-sm text-white rounded-lg border border-gray-700/50 hover:bg-purple-600/80 hover:border-purple-500/50 transition-all duration-300 flex items-center gap-2 font-semibold shadow-lg hover:shadow-purple-500/20"
+      class="absolute top-6 left-6 px-4 py-2 bg-zinc-900/90 backdrop-blur-sm text-white rounded-lg border border-zinc-700 hover:bg-zinc-800 hover:border-zinc-600 transition-all duration-200 flex items-center gap-2 text-sm font-medium"
     >
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
       </svg>
-      Back to Gallery
+      Back
     </button>
-    <div class="absolute bottom-8 left-8 bg-gray-900/80 backdrop-blur-sm text-white px-6 py-4 rounded-lg border border-gray-700/50 shadow-lg">
-      <h2 class="text-xl font-bold mb-1">Torus Wireframe</h2>
-      <p class="text-sm text-gray-300">Animated shader-based pattern on 3D geometry</p>
+    <div class="absolute bottom-6 left-6 bg-zinc-900/90 backdrop-blur-sm text-white px-5 py-3 rounded-lg border border-zinc-700">
+      <h2 class="text-lg font-medium mb-1">Torus Wireframe</h2>
+      <p class="text-xs text-zinc-400">Animated shader-based pattern on 3D geometry</p>
     </div>
   </div>
 </template>
