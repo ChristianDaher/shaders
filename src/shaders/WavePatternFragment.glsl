@@ -30,5 +30,8 @@ void main() {
         finalColor += color * d;
     }
 
+    finalColor = finalColor / (finalColor + vec3(1.0));
+    finalColor = pow(finalColor, vec3(0.85));
+
     gl_FragColor = vec4(finalColor, 1.0);
 }

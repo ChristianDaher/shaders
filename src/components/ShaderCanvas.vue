@@ -93,7 +93,6 @@ onMounted(() => {
 
   camera.position.set(props.cameraPosition.x, props.cameraPosition.y, props.cameraPosition.z);
 
-  // Function to scale plane to fit screen
   const updatePlaneScale = () => {
     if (props.fitToScreen && mesh && mesh.geometry.type === 'PlaneGeometry') {
       const aspect = window.innerWidth / window.innerHeight;
@@ -102,7 +101,6 @@ onMounted(() => {
       const planeHeightAtDistance = 2 * Math.tan(vFov / 2) * distance;
       const planeWidthAtDistance = planeHeightAtDistance * aspect;
       
-      // Scale uniformly to cover the screen based on the larger dimension
       const scale = Math.max(planeWidthAtDistance / 3, planeHeightAtDistance / 3);
       mesh.scale.set(scale, scale, 1);
     }
