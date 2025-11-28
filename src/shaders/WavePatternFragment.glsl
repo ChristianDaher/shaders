@@ -1,4 +1,6 @@
-uniform vec2 resolution;
+varying vec2 vUv;
+varying vec3 vPosition;
+
 uniform float time;
 
 vec3 palette(float t) {
@@ -11,7 +13,7 @@ vec3 palette(float t) {
 }
 
 void main() {
-    vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / resolution.y;
+    vec2 uv = (vUv * 2.0 - 1.0) * vec2(1.0, 1.0);
     vec2 uv0 = uv;
     vec3 finalColor = vec3(0.0);
 

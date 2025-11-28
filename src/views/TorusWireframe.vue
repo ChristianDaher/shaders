@@ -11,6 +11,7 @@ import {
   Clock,
   DoubleSide,
 } from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import vertexShader from "@/shaders/TorusWireframeVertex.glsl";
 import fragmentShader from "@/shaders/TorusWireframeFragment.glsl";
 
@@ -34,6 +35,10 @@ onMounted(() => {
   renderer.setSize(window.innerWidth, window.innerHeight);
   canvas.value.appendChild(renderer.domElement);
 
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.05;
+
   const clock = new Clock();
 
   const geometry = new TorusGeometry(1, 0.3, 100, 100);
@@ -53,6 +58,7 @@ onMounted(() => {
 
   const animate = function () {
     requestAnimationFrame(animate);
+    controls.update();
     material.uniforms.time.value = clock.getElapsedTime();
     renderer.render(scene, camera);
   };
@@ -81,7 +87,7 @@ onMounted(() => {
     </button>
     <div class="absolute bottom-6 left-6 bg-zinc-900/90 backdrop-blur-sm text-white px-5 py-3 rounded-lg border border-zinc-700">
       <h2 class="text-lg font-medium mb-1">Torus Wireframe</h2>
-      <p class="text-xs text-zinc-400">Animated shader-based pattern on 3D geometry</p>
+      <p class="text-xs text-zinc-400">Click and drag to rotate • Scroll to zoom</p>
     </div>
   </div>
 </template>

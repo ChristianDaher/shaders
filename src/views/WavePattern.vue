@@ -9,12 +9,10 @@ import {
   ShaderMaterial,
   Mesh,
   Clock,
-  Vector2,
   DoubleSide,
 } from "three";
 import vertexShader from "@/shaders/WavePatternVertex.glsl";
 import fragmentShader from "@/shaders/WavePatternFragment.glsl";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 const canvas = ref(null);
 const router = useRouter();
@@ -36,8 +34,6 @@ onMounted(() => {
   renderer.setSize(window.innerWidth, window.innerHeight);
   canvas.value.appendChild(renderer.domElement);
 
-  const controls = new OrbitControls(camera, renderer.domElement);
-
   const clock = new Clock();
 
   const geometry = new PlaneGeometry(3, 3);
@@ -56,7 +52,6 @@ onMounted(() => {
 
   const animate = function () {
     requestAnimationFrame(animate);
-    controls.update();
     material.uniforms.time.value = clock.getElapsedTime() / 1.5;
     renderer.render(scene, camera);
   };
@@ -85,7 +80,7 @@ onMounted(() => {
     </button>
     <div class="absolute bottom-6 left-6 bg-zinc-900/90 backdrop-blur-sm text-white px-5 py-3 rounded-lg border border-zinc-700">
       <h2 class="text-lg font-medium mb-1">Animated Wave Pattern</h2>
-      <p class="text-xs text-zinc-400">Click and drag to rotate • Scroll to zoom</p>
+      <p class="text-xs text-zinc-400">Procedural fractal shader art</p>
     </div>
   </div>
 </template>
