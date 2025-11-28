@@ -6,13 +6,13 @@ const shaders = [
     name: 'Animated Wave Pattern',
     path: '/wave-pattern',
     description: 'Fractal wave pattern with dynamic color palette using procedural generation.',
-    tags: ['Procedural', 'Fractals', 'Animation']
+    tags: ['Procedural', 'Fractals', '2D']
   },
   {
-    name: 'Torus Wireframe',
+    name: 'Morphing Torus',
     path: '/torus-wireframe',
-    description: 'Interactive 3D torus geometry with custom shader-based pattern rendering.',
-    tags: ['3D Geometry', 'Wireframe', 'Interactive']
+    description: 'Organic torus with wave displacement and animated gradient colors.',
+    tags: ['3D Geometry', 'Lighting', 'Animation']
   }
 ]
 </script>
